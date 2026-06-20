@@ -7,19 +7,16 @@ console.log('[Nebula] Logger Initialized');
 
 import { BrowserManager } from './browser/browserManager.js';
 
+import { startServer } from './server.js';
+
 const browserManager = BrowserManager.getInstance();
 
 async function main() {
-  // Initialize BrowserManager
-  await browserManager.initialize();
-  console.log('[Nebula] Browser Manager Initialized');
-
   logger.info('Nebula Autonomous Browser Intelligence agent starting up...');
   console.log('[Nebula] Nebula - Autonomous Browser Intelligence Started');
 
-  // Keep process running if needed (e.g., listening on a port)
-  const port = env.PORT;
-  logger.info(`Nebula listening on port ${port} (placeholder mode)`);
+  // Start the Dashboard API server
+  startServer();
 }
 
 // Graceful shutdown handler

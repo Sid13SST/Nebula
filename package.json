@@ -12,19 +12,24 @@
     "plan-demo": "tsx src/tests/plannerDemo.ts",
     "run-demo": "tsx src/tests/executionDemo.ts",
     "recovery-demo": "tsx src/tests/recoveryDemo.ts",
-    "cli": "tsx src/cli/cli.ts"
+    "cli": "tsx src/cli/cli.ts",
+    "dashboard": "npm run dev --prefix frontend"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.6",
     "dotenv": "^16.4.5",
+    "express": "^5.2.1",
     "playwright": "^1.49.1",
     "winston": "^3.17.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^22.10.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
