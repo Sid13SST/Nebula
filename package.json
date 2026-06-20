@@ -7,11 +7,12 @@
     "dev": "tsx src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "demo": "tsx src/tests/browserToolsDemo.ts",
+    "demo": "tsx src/tests/recoveryDemo.ts",
     "obs-demo": "tsx src/tests/observationDemo.ts",
     "plan-demo": "tsx src/tests/plannerDemo.ts",
     "run-demo": "tsx src/tests/executionDemo.ts",
-    "recovery-demo": "tsx src/tests/recoveryDemo.ts"
+    "recovery-demo": "tsx src/tests/recoveryDemo.ts",
+    "cli": "tsx src/cli/cli.ts"
   },
   "keywords": [],
   "author": "",
