@@ -9,7 +9,8 @@
     "start": "node dist/index.js",
     "demo": "tsx src/tests/browserToolsDemo.ts",
     "obs-demo": "tsx src/tests/observationDemo.ts",
-    "plan-demo": "tsx src/tests/plannerDemo.ts"
+    "plan-demo": "tsx src/tests/plannerDemo.ts",
+    "run-demo": "tsx src/tests/executionDemo.ts"
   },
   "keywords": [],
   "author": "",
