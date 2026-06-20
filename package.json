@@ -8,12 +8,14 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "demo": "tsx src/tests/browserToolsDemo.ts",
-    "obs-demo": "tsx src/tests/observationDemo.ts"
+    "obs-demo": "tsx src/tests/observationDemo.ts",
+    "plan-demo": "tsx src/tests/plannerDemo.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.4.5",
     "playwright": "^1.49.1",
     "winston": "^3.17.0",
