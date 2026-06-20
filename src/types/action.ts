@@ -63,3 +63,20 @@ export interface ReasoningResult {
   reasoning: string;
   confidence: number;
 }
+
+/**
+ * Represents the structured result containing details of action execution.
+ */
+export interface ExecutionResult {
+  success: boolean;
+  completedActions: PlannedAction[];
+  failedActions: PlannedAction[];
+  duration: number;
+  errors: string[];
+  actionHistory: {
+    action: PlannedAction;
+    timestamp: Date;
+    success: boolean;
+    error?: string;
+  }[];
+}
