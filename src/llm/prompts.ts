@@ -18,6 +18,10 @@ Interactive Elements Found:
 {{elements}}
 
 Analyze the available elements and state. Select the appropriate browser actions (e.g. CLICK, SEND_KEYS, SCROLL, SCREENSHOT, DOUBLE_CLICK).
+
+IMPORTANT:
+- For SCROLL actions, the "value" MUST be a string representation of a number of pixels (e.g. "200" to scroll down 200px, or "-300" to scroll up 300px). Do NOT use text values like "down" or "up".
+
 Format your output exactly as a JSON object matching this schema:
 {
   "reasoning": "A concise explanation of why you are taking these actions and what you expect to happen",
@@ -55,6 +59,17 @@ Examples:
       "action": "SEND_KEYS",
       "selector": "#password-input",
       "value": "password123"
+    }
+  ]
+}
+
+3. If you need to scroll down:
+{
+  "reasoning": "Scrolling down to view more content.",
+  "actions": [
+    {
+      "action": "SCROLL",
+      "value": "300"
     }
   ]
 }
