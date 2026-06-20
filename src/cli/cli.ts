@@ -20,7 +20,11 @@ async function runCli() {
   
   console.log('--- CLI INTERFACE STARTED ---');
   try {
-    const url = await askQuestion('Enter Target URL (e.g., https://example.com): ');
+    const urlInput = await askQuestion('Enter Target URL (e.g., https://example.com): ');
+    let url = urlInput.trim();
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
     const goal = await askQuestion('Enter Agent Goal (e.g., Click the header): ');
     
     rl.close();
