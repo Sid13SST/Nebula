@@ -65,6 +65,38 @@ export interface ReasoningResult {
 }
 
 /**
+ * Represents the outcome of verifying a browser action.
+ */
+export interface VerificationResult {
+  verified: boolean;
+  message: string;
+  actualState?: Record<string, any>;
+}
+
+/**
+ * Represents a log entry of a single action run.
+ */
+export interface ActionHistoryEntry {
+  timestamp: Date;
+  action: PlannedAction;
+  status: 'success' | 'failed' | 'recovered';
+  retryCount: number;
+  verificationResult?: VerificationResult;
+  recoveryAttempts: number;
+  error?: string;
+}
+
+/**
+ * Represents details of self-healing and recovery events.
+ */
+export interface RecoveryReport {
+  totalRecoveries: number;
+  successfulRecoveries: number;
+  failedRecoveries: number;
+  replansTriggered: number;
+}
+
+/**
  * Represents the structured result containing details of action execution.
  */
 export interface ExecutionResult {
@@ -73,10 +105,6 @@ export interface ExecutionResult {
   failedActions: PlannedAction[];
   duration: number;
   errors: string[];
-  actionHistory: {
-    action: PlannedAction;
-    timestamp: Date;
-    success: boolean;
-    error?: string;
-  }[];
+  actionHistory: ActionHistoryEntry[];
+  recoveryReport?: RecoveryReport;
 }
