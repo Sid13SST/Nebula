@@ -1,0 +1,27 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+
+# Environment configurations
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs and screenshots directories (preserve directory structures but ignore contents)
+logs/*
+!logs/.gitkeep
+screenshots/*
+!screenshots/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
