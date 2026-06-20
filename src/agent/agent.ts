@@ -5,6 +5,7 @@ import { takeScreenshot } from '../tools/takeScreenshot.js';
 import { ExecutionResult } from '../types/action.js';
 import { AgentError } from '../errors/AppError.js';
 import { logger } from '../logging/logger.js';
+import { agentEvents } from '../logging/eventManager.js';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -62,9 +63,12 @@ export class AutomationAgent {
     try {
       // 1. Observe page state
       logger.info('Step 1: Observing page state...');
+      agentEvents.emit('status', { state: 'Observation Running' });
       const obsStartTime = Date.now();
       const observation = await this.observer.observe();
       observationTime = Date.now() - obsStartTime;
+      agentEvents.emit('status', { state: 'Observation Complete' });
+      agentEvents.emit('observation', observation);
 
       // Capture "before" screenshot
       const tsBefore = getTimestamp();
@@ -78,12 +82,15 @@ export class AutomationAgent {
 
       // 2. Generate action plan from Gemini client
       logger.info('Step 2: Generating action plan from Gemini client...');
+      agentEvents.emit('status', { state: 'Planning Running' });
       const planStartTime = Date.now();
       const plan = await this.planner.plan(goal, observation);
       planningTime = Date.now() - planStartTime;
+      agentEvents.emit('status', { state: 'Planning Complete' });
 
       // 3. Execute plan
       logger.info('Step 3: Dispatching plan execution...');
+      agentEvents.emit('status', { state: 'Execution Running' });
       const execStartTime = Date.now();
       let result = await this.executor.executePlan(plan);
       executionTime = Date.now() - execStartTime;

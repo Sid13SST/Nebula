@@ -105,7 +105,15 @@ export class Planner {
 
       logger.info('Plan validated');
       logger.info('Planning completed');
-      return validationResult.data;
+      
+      const plan = validationResult.data;
+      // Emit plan to agentEvents
+      try {
+        const { agentEvents } = await import('../logging/eventManager.js');
+        agentEvents.emit('plan', plan);
+      } catch {}
+
+      return plan;
     } catch (error: any) {
       logger.error(`Planner plan execution failed: ${error.message}`);
       if (error instanceof AgentError) {
