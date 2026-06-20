@@ -40,3 +40,12 @@ export class AgentError extends AppError {
     super(message, statusCode, true);
   }
 }
+
+/**
+ * Thrown during DOM parsing, element extraction, or visual observation.
+ */
+export class ObservationError extends AppError {
+  constructor(message: string, statusCode: number = 500) {
+    super(message, statusCode, true);
+  }
+}
