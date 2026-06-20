@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="bg-glow" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#120d31" />
+      <stop offset="60%" stop-color="#070514" />
+      <stop offset="100%" stop-color="#020108" />
+    </radialGradient>
+    
+    <!-- Neon Gradients -->
+    <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+    <linearGradient id="neon-magenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff0844" />
+      <stop offset="100%" stop-color="#ffb199" />
+    </linearGradient>
+    <linearGradient id="neon-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b15cff" />
+      <stop offset="100%" stop-color="#5017c2" />
+    </linearGradient>
+    
+    <!-- Glow Filters -->
+    <filter id="glow-heavy" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    /* CSS Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @keyframes pulse-glow {
+      0% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0.3; }
+    }
+
+    @keyframes rotate-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+
+    @keyframes node-activate {
+      0%, 100% { fill: #1a153b; stroke: rgba(177, 92, 255, 0.4); filter: none; }
+      20% { fill: #00f2fe; stroke: #00f2fe; filter: url(#glow-soft); }
+      40% { fill: #ff0844; stroke: #ff0844; filter: url(#glow-soft); }
+      60% { fill: #b15cff; stroke: #b15cff; filter: url(#glow-soft); }
+    }
+
+    .bg {
+      fill: url(#bg-glow);
+    }
+
+    .animated-ring-1 {
+      transform-origin: 600px 200px;
+      animation: rotate-slow 25s linear infinite;
+    }
+
+    .animated-ring-2 {
+      transform-origin: 600px 200px;
+      animation: rotate-slow 15s linear reverse infinite;
+    }
+
+    .floating-logo {
+      animation: float 6s ease-in-out infinite;
+      transform-origin: 600px 160px;
+    }
+
+    .glowing-core {
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    .flow-line {
+      stroke: url(#neon-purple);
+      stroke-dasharray: 8, 12;
+      animation: dash 2s linear infinite;
+    }
+
+    .node {
+      transition: all 0.5s ease;
+      stroke-width: 2;
+    }
+
+    /* Sequential highlighting for cognitive loop nodes */
+    .node-obs { animation: node-activate 10s infinite; animation-delay: 0s; }
+    .node-plan { animation: node-activate 10s infinite; animation-delay: 2s; }
+    .node-exec { animation: node-activate 10s infinite; animation-delay: 4s; }
+    .node-ver { animation: node-activate 10s infinite; animation-delay: 6s; }
+    .node-rec { animation: node-activate 10s infinite; animation-delay: 8s; }
+
+    .label-text {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2px;
+      fill: #a0aec0;
+      text-anchor: middle;
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" width="1200" height="400" rx="16" />
+
+  <!-- Grid Pattern Overlay for Tech Aesthetic -->
+  <g opacity="0.08">
+    <path d="M0,50 H1200 M0,100 H1200 M0,150 H1200 M0,200 H1200 M0,250 H1200 M0,300 H1200 M0,350 H1200" stroke="#ffffff" stroke-width="1" />
+    <path d="M100,0 V400 M200,0 V400 M300,0 V400 M400,0 V400 M500,0 V400 M600,0 V400 M700,0 V400 M800,0 V400 M900,0 V400 M1000,0 V400 M1100,0 V400" stroke="#ffffff" stroke-width="1" />
+  </g>
+
+  <!-- Ambient Light Backdrops (Nebula clouds) -->
+  <circle cx="600" cy="180" r="180" fill="#7b2cbf" opacity="0.15" filter="url(#glow-heavy)" />
+  <circle cx="450" cy="200" r="130" fill="#00b4d8" opacity="0.12" filter="url(#glow-heavy)" />
+  <circle cx="750" cy="200" r="130" fill="#f72585" opacity="0.12" filter="url(#glow-heavy)" />
+
+  <!-- Animated Rings in Background -->
+  <g opacity="0.25">
+    <circle class="animated-ring-1" cx="600" cy="200" r="160" fill="none" stroke="url(#neon-cyan)" stroke-width="1.5" stroke-dasharray="100 40 20 40" />
+    <circle class="animated-ring-2" cx="600" cy="200" r="135" fill="none" stroke="url(#neon-magenta)" stroke-width="1" stroke-dasharray="50 150 80 50" />
+  </g>
+
+  <!-- Central Logo Core -->
+  <g class="floating-logo">
+    <!-- Starburst/Constellation Effects -->
+    <path d="M 600,60 L 600,260 M 500,160 L 700,160" stroke="#ffffff" stroke-dasharray="4,12" stroke-width="1" opacity="0.3" />
+    
+    <!-- Outer Hex Shield -->
+    <polygon points="600,90 660,125 660,195 600,230 540,195 540,125" fill="none" stroke="url(#neon-cyan)" stroke-width="2" opacity="0.8" filter="url(#glow-soft)" />
+    
+    <!-- Inner Pulsing Glowing Core -->
+    <circle class="glowing-core" cx="600" cy="160" r="25" fill="url(#neon-magenta)" filter="url(#glow-heavy)" />
+    <circle cx="600" cy="160" r="12" fill="#ffffff" filter="url(#glow-soft)" />
+    
+    <!-- Branding Text -->
+    <text x="600" y="278" font-family="'Outfit', 'Segoe UI', -apple-system, sans-serif" font-weight="900" font-size="46" fill="#ffffff" letter-spacing="12" text-anchor="middle" filter="url(#glow-soft)">NEBULA</text>
+    <text x="600" y="302" font-family="'Segoe UI', -apple-system, sans-serif" font-weight="600" font-size="11" fill="url(#neon-cyan)" letter-spacing="6" text-anchor="middle">AUTONOMOUS COGNITIVE ENGINE</text>
+  </g>
+
+  <!-- Flow Lines (Paths connecting the nodes) -->
+  <path class="flow-line" d="M 180,200 L 380,200" stroke-width="2" />
+  <path class="flow-line" d="M 380,200 L 600,160" stroke-width="2" />
+  <path class="flow-line" d="M 600,160 L 820,200" stroke-width="2" />
+  <path class="flow-line" d="M 820,200 L 1020,200" stroke-width="2" />
+  <path class="flow-line" d="M 1020,200 Q 600,380 180,200" fill="none" stroke-width="2" />
+
+  <!-- Node 1: Observe -->
+  <g transform="translate(180, 200)">
+    <circle class="node node-obs" cx="0" cy="0" r="16" fill="#1a153b" stroke="rgba(0, 242, 254, 0.4)" />
+    <circle cx="0" cy="0" r="6" fill="#00f2fe" />
+    <text y="-25" class="label-text">OBSERVE</text>
+  </g>
+
+  <!-- Node 2: Plan -->
+  <g transform="translate(380, 200)">
+    <circle class="node node-plan" cx="0" cy="0" r="16" fill="#1a153b" stroke="rgba(255, 8, 68, 0.4)" />
+    <circle cx="0" cy="0" r="6" fill="#ff0844" />
+    <text y="-25" class="label-text">PLAN</text>
+  </g>
+
+  <!-- Node 3: Execute (Central/Behind Core) -->
+  <g transform="translate(600, 160)">
+    <!-- Hidden beneath core, but keeps visual alignment -->
+    <circle class="node node-exec" cx="0" cy="0" r="32" fill="none" stroke="rgba(177, 92, 255, 0.4)" />
+    <text y="-55" class="label-text" fill="#b15cff">EXECUTE</text>
+  </g>
+
+  <!-- Node 4: Verify -->
+  <g transform="translate(820, 200)">
+    <circle class="node node-ver" cx="0" cy="0" r="16" fill="#1a153b" stroke="rgba(0, 242, 254, 0.4)" />
+    <circle cx="0" cy="0" r="6" fill="#00f2fe" />
+    <text y="-25" class="label-text">VERIFY</text>
+  </g>
+
+  <!-- Node 5: Recover (Self-Healing) -->
+  <g transform="translate(1020, 200)">
+    <circle class="node node-rec" cx="0" cy="0" r="16" fill="#1a153b" stroke="rgba(255, 8, 68, 0.4)" />
+    <circle cx="0" cy="0" r="6" fill="#ff0844" />
+    <text y="-25" class="label-text">RECOVER</text>
+  </g>
+</svg>
