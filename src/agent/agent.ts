@@ -5,11 +5,10 @@ import { takeScreenshot } from '../tools/takeScreenshot.js';
 import { ExecutionResult } from '../types/action.js';
 import { AgentError } from '../errors/AppError.js';
 import { logger } from '../logging/logger.js';
-import { BrowserManager } from '../browser/browserManager.js';
 import * as path from 'path';
 
 /**
- * AutomationAgent coordinates the core agentic loop: Observe -> Plan -> Execute.
+ * AutomationAgent coordinates the core agentic loop: Observe -> Plan -> Execute -> Verify -> Recover -> Re-plan.
  */
 export class AutomationAgent {
   private planner: Planner;
@@ -24,7 +23,7 @@ export class AutomationAgent {
 
   /**
    * Runs the agentic loop (Observe -> Plan -> Execute) to accomplish a given goal.
-   * Automatically captures screenshot on completion or failure.
+   * Incorporates self-healing verification, selector recovery, and AI re-planning.
    */
   public async run(goal: string): Promise<ExecutionResult> {
     logger.info(`Starting agent orchestration for goal: "${goal}"`);
@@ -41,9 +40,45 @@ export class AutomationAgent {
 
       // 3. Execute plan
       logger.info('Step 3: Dispatching plan execution...');
-      const result = await this.executor.executePlan(plan);
+      let result = await this.executor.executePlan(plan);
 
-      // Capture screenshot on success or failure of execution
+      // 4. Re-planning fallback: If execution failed, attempt re-planning once
+      if (!result.success) {
+        logger.warn('Initial execution plan failed. Triggering re-planning...');
+        try {
+          const errorMsg = result.errors.join(', ');
+          const recoveryManager = (this.executor as any).recoveryManager;
+          
+          // Request new action plan using failure context
+          const newPlan = await recoveryManager.requestReplan(goal, errorMsg);
+          
+          if (newPlan && newPlan.actions.length > 0) {
+            logger.info('Executing newly generated replan...');
+            const newResult = await this.executor.executePlan(newPlan);
+            
+            // Combine action outcomes and histories
+            result = {
+              success: newResult.success,
+              completedActions: [...result.completedActions, ...newResult.completedActions],
+              failedActions: newResult.success ? [] : newResult.failedActions,
+              duration: result.duration + newResult.duration,
+              errors: newResult.success ? [] : [...result.errors, ...newResult.errors],
+              actionHistory: [...result.actionHistory, ...newResult.actionHistory],
+              recoveryReport: {
+                totalRecoveries: (result.recoveryReport?.totalRecoveries || 0) + (newResult.recoveryReport?.totalRecoveries || 0),
+                successfulRecoveries: (result.recoveryReport?.successfulRecoveries || 0) + (newResult.recoveryReport?.successfulRecoveries || 0),
+                failedRecoveries: (result.recoveryReport?.failedRecoveries || 0) + (newResult.recoveryReport?.failedRecoveries || 0),
+                replansTriggered: (result.recoveryReport?.replansTriggered || 0) + 1,
+              },
+            };
+          }
+        } catch (replanError: any) {
+          logger.error(`Re-planning workflow failed: ${replanError.message}`);
+          result.errors.push(`Re-planning failed: ${replanError.message}`);
+        }
+      }
+
+      // Capture screenshot on success or failure of final execution state
       const pad = (num: number) => String(num).padStart(2, '0');
       const now = new Date();
       const timestampStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(
