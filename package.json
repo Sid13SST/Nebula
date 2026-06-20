@@ -7,7 +7,8 @@
     "dev": "tsx src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "demo": "tsx src/tests/browserToolsDemo.ts"
+    "demo": "tsx src/tests/browserToolsDemo.ts",
+    "obs-demo": "tsx src/tests/observationDemo.ts"
   },
   "keywords": [],
   "author": "",
