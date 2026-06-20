@@ -1,25 +1,25 @@
 {
   "goal": "Input text into the Bug Title field",
   "url": "https://ui.shadcn.com/docs/forms/react-hook-form",
-  "duration": 10521,
+  "duration": 5782,
   "success": true,
   "actionsExecuted": 1,
   "recoveries": {
-    "totalRecoveries": 1,
-    "successfulRecoveries": 1,
+    "totalRecoveries": 0,
+    "successfulRecoveries": 0,
     "failedRecoveries": 0,
     "replansTriggered": 0
   },
   "errors": [],
   "screenshots": {
-    "before": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\before\\before_2026-06-21_01-17-06.png",
-    "after": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\after\\after_2026-06-21_01-17-16.png"
+    "before": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\before\\before_2026-06-21_04-09-19.png",
+    "after": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\after\\after_2026-06-21_04-09-23.png"
   },
   "metrics": {
-    "planningTimeMs": 1,
-    "observationTimeMs": 188,
-    "executionTimeMs": 10123,
-    "recoveryCount": 1,
+    "planningTimeMs": 3693,
+    "observationTimeMs": 1064,
+    "executionTimeMs": 294,
+    "recoveryCount": 0,
     "successRate": 1
   }
 }
