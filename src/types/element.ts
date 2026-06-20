@@ -8,10 +8,11 @@ export enum ElementType {
   SELECT = 'SELECT',
   CHECKBOX = 'CHECKBOX',
   RADIO = 'RADIO',
+  UNKNOWN = 'UNKNOWN',
 }
 
 /**
- * Represents a extracted element from a webpage.
+ * Represents an extracted element from a webpage.
  */
 export interface BrowserElement {
   id: string;
@@ -28,4 +29,27 @@ export interface BrowserElement {
   };
   isVisible: boolean;
   isDisabled: boolean;
+}
+
+/**
+ * Extended representation of an element containing additional parsed metadata from observation.
+ */
+export interface DetectedElement extends BrowserElement {
+  label?: string;
+  name?: string;
+  placeholder?: string;
+  ariaLabel?: string;
+  readonly?: boolean;
+}
+
+/**
+ * Representation of a detected form field.
+ */
+export interface DetectedFormField {
+  label?: string;
+  name?: string;
+  selector: string;
+  type: ElementType;
+  elementId: string;
+  value?: string;
 }
