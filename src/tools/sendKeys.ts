@@ -12,7 +12,7 @@ export async function sendKeys(selector: string, text: string): Promise<ToolResu
   try {
     logger.info(`Tool: Sending keys to selector "${selector}"`);
     const page = BrowserManager.getInstance().getPage();
-    const locator = page.locator(selector);
+    const locator = page.locator(selector).first();
 
     // Wait for selector
     await locator.waitFor({ state: 'visible', timeout: 10000 });
@@ -28,6 +28,12 @@ export async function sendKeys(selector: string, text: string): Promise<ToolResu
     if (enteredValue !== text) {
       throw new Error(`Verification failed: Expected value to be "${text}" but got "${enteredValue}"`);
     }
+
+    // Press Enter to submit searches/forms automatically
+    await locator.press('Enter');
+
+    // Give the page a moment to process the form submission/navigation
+    await page.waitForTimeout(2000);
 
     logger.info(`Typed into selector: "${selector}" -> "${text}"`);
     return {

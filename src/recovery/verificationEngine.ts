@@ -35,7 +35,7 @@ export class VerificationEngine {
           if (!action.selector) {
             return { verified: false, message: 'Verification failed: selector is missing' };
           }
-          const locator = page.locator(action.selector);
+          const locator = page.locator(action.selector).first();
           const val = await locator.inputValue({ timeout: 2000 });
           const matches = val === action.value;
           return {
@@ -51,7 +51,7 @@ export class VerificationEngine {
         case ActionType.DOUBLE_CLICK: {
           // If selector was clicked, make sure it exists, is visible and enabled
           if (action.selector) {
-            const locator = page.locator(action.selector);
+            const locator = page.locator(action.selector).first();
             const count = await locator.count();
             if (count === 0) {
               return {

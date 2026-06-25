@@ -1,9 +1,9 @@
 {
-  "goal": "Input text into the Bug Title field",
-  "url": "https://ui.shadcn.com/docs/forms/react-hook-form",
-  "duration": 5782,
+  "goal": "Go to the website, search \"germany 2026 fifa\" click search and show top 3 videos",
+  "url": "https://www.youtube.com/",
+  "duration": 3239,
   "success": true,
-  "actionsExecuted": 1,
+  "actionsExecuted": 2,
   "recoveries": {
     "totalRecoveries": 0,
     "successfulRecoveries": 0,
@@ -12,13 +12,13 @@
   },
   "errors": [],
   "screenshots": {
-    "before": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\before\\before_2026-06-21_04-09-19.png",
-    "after": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\after\\after_2026-06-21_04-09-23.png"
+    "before": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\before\\before_2026-06-25_17-49-29.png",
+    "after": "C:\\Users\\Siddhant\\OneDrive\\Desktop\\Nebula\\screenshots\\after\\after_2026-06-25_17-49-32.png"
   },
   "metrics": {
-    "planningTimeMs": 3693,
-    "observationTimeMs": 1064,
-    "executionTimeMs": 294,
+    "planningTimeMs": 2821,
+    "observationTimeMs": 125,
+    "executionTimeMs": 153,
     "recoveryCount": 0,
     "successRate": 1
   }

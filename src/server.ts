@@ -16,6 +16,9 @@ app.use(express.json());
 // Serve screenshots static folder
 app.use('/screenshots', express.static(path.join(process.cwd(), 'screenshots')));
 
+// Serve frontend static files
+app.use(express.static(path.join(process.cwd(), 'frontend', 'dist')));
+
 let currentStatus = 'Pending';
 let latestObservation: any = null;
 let latestPlan: any = null;
@@ -159,6 +162,10 @@ app.get('/api/report', (req, res) => {
 
 app.get('/api/screenshots/latest', (req, res) => {
   res.json(latestReport?.screenshots || {});
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'frontend', 'dist', 'index.html'));
 });
 
 const serverPort = env.PORT || 3000;

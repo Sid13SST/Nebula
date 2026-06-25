@@ -45,6 +45,13 @@ export class BrowserManager {
       
       this.browser = await chromium.launch({
         headless: env.HEADLESS,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--single-process'
+        ]
       });
 
       this.context = await this.browser.newContext({

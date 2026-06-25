@@ -106,7 +106,7 @@ export class Executor {
           y = parseInt(parts[1], 10);
         } else if (action.selector) {
           const page = BrowserManager.getInstance().getPage();
-          const bbox = await page.locator(action.selector).boundingBox();
+          const bbox = await page.locator(action.selector).first().boundingBox({ timeout: 5000 });
           if (!bbox) {
             throw new BrowserError(`Target selector "${action.selector}" not found on screen`);
           }
