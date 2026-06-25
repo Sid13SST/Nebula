@@ -164,7 +164,7 @@ app.get('/api/screenshots/latest', (req, res) => {
   res.json(latestReport?.screenshots || {});
 });
 
-app.get('*', (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(process.cwd(), 'frontend', 'dist', 'index.html'));
 });
 
